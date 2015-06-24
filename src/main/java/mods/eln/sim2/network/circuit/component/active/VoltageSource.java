@@ -12,6 +12,8 @@ public class VoltageSource extends Component {
     public VoltageSource(final Voltage voltage) {
         _voltage = voltage;
     }
+
+    @Override
     public void registerInEquasion(final CircutEquasion equasion, final Edge edge) {
         equasion.addVoltageSource(edge.terminals, _voltage);
     }

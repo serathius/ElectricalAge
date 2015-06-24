@@ -31,7 +31,7 @@ public class NetworkState {
     public NetworkState(final Network network, final Map<Unknown, Double> unknowns) {
         this(network);
         for (Map.Entry<Unknown, Double> entry: unknowns.entrySet()) {
-            entry.getKey().register(entry.getValue(), _node_porentials, _edge_currents);
+            entry.getKey().registerInState(entry.getValue(), _node_porentials, _edge_currents);
         }
     }
     

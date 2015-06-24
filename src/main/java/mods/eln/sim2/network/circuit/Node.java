@@ -7,7 +7,7 @@ import mods.eln.sim2.primitive.Current;
 import mods.eln.sim2.primitive.Potential;
 
 public class Node implements Unknown {
-    public void register(double value, Map<Node, Potential> potentials, Map<Edge, Current> currents) {
+    public void registerInState(double value, Map<Node, Potential> potentials, Map<Edge, Current> currents) {
         potentials.put(this, Potential.volts(value));
     }
 }

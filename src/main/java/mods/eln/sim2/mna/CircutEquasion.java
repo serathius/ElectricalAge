@@ -86,13 +86,13 @@ public class CircutEquasion {
         return matrix;
     }
     
-    public void addPassiveComponent(final Edge current, final Terminals voltage_terminals, Resistance resistance) {
+    public void addPassiveComponent(final Edge current, final Terminals voltage_terminals, final Resistance resistance, final Voltage voltage) {
         DefaultHashMap<Unknown, Double> row = new DefaultHashMap<Unknown, Double>(0.0);
         row.put(current, -resistance.getValue());
         row.put((Unknown) voltage_terminals.first, 1.0);
         row.put((Unknown) voltage_terminals.second, -1.0);
         _A.add(row);
-        _B.add(0.0);
+        _B.add(voltage.getValue());
     }
     
     public void addVoltageSource(final Terminals voltage_terminals, final Voltage voltage) {

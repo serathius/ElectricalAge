@@ -39,8 +39,7 @@ public abstract class Unit {
                     return String.format("%.2f %s%s", _value / entry.first, entry.second, getUnit());
                 }
             }
-            Pair<Double, String> last_entry = sizes.get(sizes.size() - 1);
-            return String.format("%.2f %s%s", _value / last_entry.first, last_entry.second, getUnit());
+            return String.format("%.2f %s", 0.0, getUnit());
         }
     }
 	
@@ -49,7 +48,7 @@ public abstract class Unit {
 	public boolean equals(Object object) {
 	    if (object.getClass() == getClass()) {
 	        Unit other = (Unit) object;
-	        return Math.abs(other._value - _value) <= 1.0e-14;
+	        return Math.abs(other._value - _value) <= 1.0e-9;
 	    }
 	    else {
 	        return false;

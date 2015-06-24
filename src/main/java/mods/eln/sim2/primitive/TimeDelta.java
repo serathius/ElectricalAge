@@ -13,4 +13,8 @@ public class TimeDelta extends Unit {
     protected String getUnit() {
         return "s";
     }
+
+    public Resistance divide(final Capacitance capacitance) {
+        return new Resistance(_value * capacitance._value);
+    }
 }

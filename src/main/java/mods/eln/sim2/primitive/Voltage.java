@@ -43,4 +43,12 @@ public class Voltage extends Unit {
 	public static Voltage max(final Voltage first, final Voltage second) {
 		return new Voltage(Math.max(first._value, second._value));
 	}
+
+    public Voltage add(final Voltage other) {
+        return new Voltage(_value + other._value);
+    }
+
+    public Voltage substract(Voltage other) {
+        return new Voltage(_value - other._value);
+    }
 }

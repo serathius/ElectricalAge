@@ -38,7 +38,7 @@ public class Solver {
     private Map<Unknown, Double> solveSubnetwork(final Subnetwork subnetwork) {
         CircutEquasion equasion = new CircutEquasion();
         for (Edge edge: subnetwork.graph._edges) {
-            edge.component.registerInEquasion(equasion, edge);
+            edge.registerInEquasion(equasion);
         }
         Iterator<Node> nodes = subnetwork.graph._nodes.iterator();
         Node ground_node = nodes.next();
