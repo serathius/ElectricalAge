@@ -44,7 +44,7 @@ public class SimulationTest {
     @Test
     public void unconnectedElements() {
         Simulation sim = new Simulation();
-        Edge source = sim._network.freeComponent(new Resistor(Resistance.ohms(1.0)));
+        Edge source = sim._network.freeComponent(new VoltageSource(Voltage.volts(1.0)));
         Edge resistor = sim._network.freeComponent(new Resistor(Resistance.ohms(1.0)));
         NetworkState state = sim._state.next(TimeDelta.seconds(1.0));
         assertEquals(Voltage.volts(1.0), state.getVoltage(source.terminals));

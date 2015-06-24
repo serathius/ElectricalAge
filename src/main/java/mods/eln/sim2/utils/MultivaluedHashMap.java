@@ -68,6 +68,20 @@ public class MultivaluedHashMap<K, V> implements Iterable<V> {
     public List<V> get(final K key) {
         return _map.get(key);
     }
+
+    public void addAll(final MultivaluedHashMap<K, V> other) {
+        List<V> values;
+        for (Map.Entry<K, List<V>> entry: _map.entrySet()) {
+            if (!_map.containsKey(entry.getKey())) {
+                values = new LinkedList<V>();
+                _map.put(entry.getKey(), values);
+            }
+            else {
+                values = _map.get(entry.getKey());
+            }
+            values.addAll(entry.getValue());
+        }
+    }
     
     class MultivaluedHashMapValuesIterator<V> implements Iterator<V> {
         Iterator<List<V>> _outer_iterator;

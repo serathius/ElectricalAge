@@ -20,6 +20,14 @@ public class NetworkGraph {
         _edges = new MultivaluedHashMap<Terminals, Edge>();
     }
     
+    public NetworkGraph(NetworkGraph first, NetworkGraph second) {
+        this();
+        _nodes.addAll(first._nodes);
+        _nodes.addAll(second._nodes);
+        _edges.addAll(first._edges);
+        _edges.addAll(second._edges);
+    }
+
     public Edge freeComponent(final Component component) {
         Node from = new Node();
         Node to = new Node();

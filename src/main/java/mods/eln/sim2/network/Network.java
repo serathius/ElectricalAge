@@ -18,21 +18,50 @@ import mods.eln.sim2.utils.MultivaluedHashMap;
 
 
 public class Network {
-    public final NetworkGraph graph;
+    public final List<Subnetwork> _subnetworks;
     
     public Network() {
-        graph = new NetworkGraph();
+        _subnetworks = new LinkedList<Subnetwork>();
     }
     
     public Edge freeComponent(final Component component) {
-        return graph.freeComponent(component);
+        Subnetwork subnetwork = new Subnetwork();
+        Edge edge = subnetwork.freeComponent(component);
+        _subnetworks.add(subnetwork);
+        return edge;
     }
     
     public Edge connectComponent(final Node from, final Node to, final Component component) {
-        return graph.connectComponent(from, to, component);
+        Subnetwork fromSubnetwork = null, toSubnetwork = null;
+        for (Subnetwork network: _subnetworks) {
+            if (network.graph._nodes.contains(from)) {
+                fromSubnetwork = network;
+            }
+            if (network.graph._nodes.contains(to)) {
+                toSubnetwork = network;
+            }
+        }
+        if (fromSubnetwork == toSubnetwork || fromSubnetwork != null) {
+            return fromSubnetwork.connectComponent(from, to, component);
+        }
+        else {
+            assert fromSubnetwork != null && toSubnetwork != null;
+            _subnetworks.remove(fromSubnetwork);
+            _subnetworks.remove(toSubnetwork);
+            Subnetwork joined_subnetwork = new Subnetwork(fromSubnetwork, toSubnetwork); 
+            _subnetworks.add(joined_subnetwork);
+            return joined_subnetwork.connectComponent(from, to, component);
+        }
     }
     
     public Edge connectComponentFrom(final Node from, final Component component) {
-        return graph.connectComponentFrom(from, component);
+        for (Subnetwork network: _subnetworks) {
+            if (network.graph._nodes.contains(from)) {
+                return network.connectComponentFrom(from, component);
+            }
+        }
+        assert false;
+        return null;
     }
+    
 }
