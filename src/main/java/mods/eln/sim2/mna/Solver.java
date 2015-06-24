@@ -30,16 +30,16 @@ public class Solver {
     
     public NetworkState solve() {
         CircutEquasion equasion = new CircutEquasion();
-        for (Edge edge: _network._edges) {
+        for (Edge edge: _network.graph._edges) {
             edge.component.registerInEquasion(equasion, edge);
         }
-        Iterator<Node> nodes = _network._nodes.iterator();
+        Iterator<Node> nodes = _network.graph._nodes.iterator();
         Node ground_node = nodes.next();
         equasion.setUnknown(ground_node, 0.0);
         while (nodes.hasNext()) {
             Node node = nodes.next();
             List<Edge> edges = new LinkedList<Edge>();
-            for (Edge edge: _network._edges) {
+            for (Edge edge: _network.graph._edges) {
                 if (edge.terminals.first == node || edge.terminals.second == node) {
                     edges.add(edge);
                 }

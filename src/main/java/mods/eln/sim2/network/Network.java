@@ -18,31 +18,21 @@ import mods.eln.sim2.utils.MultivaluedHashMap;
 
 
 public class Network {
-    public final Set<Node> _nodes;
-    public final MultivaluedHashMap<Terminals, Edge> _edges;
+    public final NetworkGraph graph;
     
     public Network() {
-        _nodes = new HashSet<Node>();
-        _edges = new MultivaluedHashMap<Terminals, Edge>();
+        graph = new NetworkGraph();
     }
     
     public Edge freeComponent(final Component component) {
-        Node from = new Node();
-        Node to = new Node();
-        return connectComponent(from, to, component);
+        return graph.freeComponent(component);
     }
-
+    
     public Edge connectComponent(final Node from, final Node to, final Component component) {
-        _nodes.add(from);
-        _nodes.add(to);
-        Terminals terminals = new Terminals(from, to); 
-        Edge edge = new Edge(terminals, component);
-        _edges.put(edge.terminals, edge);
-        return edge;
+        return graph.connectComponent(from, to, component);
     }
-
+    
     public Edge connectComponentFrom(final Node from, final Component component) {
-        Node to = new Node();
-        return connectComponent(from, to, component);
+        return graph.connectComponentFrom(from, component);
     }
 }
