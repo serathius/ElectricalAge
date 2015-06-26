@@ -51,4 +51,8 @@ public class Voltage extends Unit {
     public Voltage substract(Voltage other) {
         return new Voltage(_value - other._value);
     }
+
+    public Voltage oposite() {
+        return new Voltage(-_value);
+    }
 }

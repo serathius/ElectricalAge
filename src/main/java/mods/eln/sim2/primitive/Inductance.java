@@ -1,7 +1,7 @@
 package mods.eln.sim2.primitive;
 
 public class Inductance extends Unit {
-    public static Inductance herns(double value) {
+    public static Inductance henrs(double value) {
         return new Inductance(value);
     }
     
